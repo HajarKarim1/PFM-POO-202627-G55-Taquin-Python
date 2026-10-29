@@ -1,0 +1,1 @@
+In this folder, you should put all the files that are relevant to your project. Make sure to organize them properly and keep the folder structure clean for easy navigation.

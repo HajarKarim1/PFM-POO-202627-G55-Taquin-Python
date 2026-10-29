@@ -1,0 +1,220 @@
+# =========================================================
+#  Whitelist .gitignore — source, assets & build definitions
+#  Target: C/C++, Java, Python game projects with UI
+#  Rule: ignore everything, then re-include what we want.
+#  Order matters: the LAST matching pattern wins.
+# =========================================================
+
+# 1) Ignore everything
+*
+
+# 2) Re-include all directories so Git can descend into them
+!*/
+
+# 3) Repository meta files
+!.gitignore
+!.gitattributes
+!.gitmodules
+!.editorconfig
+!README.md
+!LICENSE
+!LICENSE.*
+
+# ---------------- C / C++ sources & build definitions ----------------
+!*.c
+!*.cpp
+!*.cc
+!*.cxx
+!*.h
+!*.hpp
+!*.hh
+!*.hxx
+!*.inl
+!*.ipp
+!CMakeLists.txt
+!CMakePresets.json
+!*.cmake
+!*.cmake.in
+!Makefile
+!makefile
+!vcpkg.json
+!vcpkg-configuration.json
+!conanfile.txt
+!conanfile.py
+!.clang-format
+!.clang-tidy
+# Qt (qmake / Designer / resources / QML)
+!*.pro
+!*.pri
+!*.ui
+!*.qrc
+!*.qml
+# Windows / macOS / Linux application resources
+!*.rc
+!*.manifest
+!*.plist
+!*.desktop
+
+# ---------------- Java sources & build definitions ----------------
+!*.java
+!pom.xml
+!build.gradle
+!build.gradle.kts
+!settings.gradle
+!settings.gradle.kts
+!gradle.properties
+!*.properties
+# Gradle wrapper (required to rebuild without a local Gradle install)
+!gradlew
+!gradlew.bat
+!**/gradle/wrapper/gradle-wrapper.jar
+!**/gradle/wrapper/gradle-wrapper.properties
+# Maven wrapper
+!mvnw
+!mvnw.cmd
+!**/.mvn/wrapper/maven-wrapper.properties
+# JavaFX / Swing GUI designers (IntelliJ, NetBeans)
+!*.fxml
+!*.form
+
+# ---------------- Python sources & environment definitions ----------------
+!*.py
+!*.pyw
+!requirements*.txt
+!pyproject.toml
+!setup.cfg
+!Pipfile
+!Pipfile.lock
+!poetry.lock
+!uv.lock
+!.python-version
+!*.ipynb
+# PyInstaller spec (hand-edited packaging recipe)
+!*.spec
+
+# ---------------- Game assets ----------------
+# Catch-all: everything inside assets/ or resources/ directories
+!**/assets/**
+!**/resources/**
+# Fallback by extension (assets stored elsewhere)
+# Images / textures / icons
+!*.png
+!*.jpg
+!*.jpeg
+!*.bmp
+!*.gif
+!*.svg
+!*.tga
+!*.webp
+!*.ico
+!*.icns
+# Audio
+!*.wav
+!*.ogg
+!*.mp3
+!*.flac
+# Fonts
+!*.ttf
+!*.otf
+!*.fnt
+# Shaders
+!*.glsl
+!*.vert
+!*.frag
+!*.geom
+!*.comp
+!*.hlsl
+# 3D models / materials
+!*.obj
+!*.mtl
+!*.gltf
+!*.glb
+!*.fbx
+# Levels, maps, data & configuration (Tiled, JSON, XML, YAML, INI)
+!*.tmx
+!*.tsx
+!*.tmj
+!*.tsj
+!*.json
+!*.xml
+!*.yaml
+!*.yml
+!*.ini
+!*.toml
+# Stylesheets (JavaFX, Qt, Python GUI themes)
+!*.css
+!*.qss
+
+# ---------------- Documentation / lab statements ----------------
+!*.md
+!*.pdf
+!*.txt
+!*.csv
+
+# =========================================================
+# 4) Re-exclude generated / environment / IDE content
+#    (placed last so they override the whitelist above)
+# =========================================================
+
+# --- Build output directories ---
+build/
+build-*/
+cmake-build-*/
+out/
+bin/
+obj/
+target/
+dist/
+Debug/
+Release/
+x64/
+_deps/
+vcpkg_installed/
+
+# --- CMake in-source build artifacts ---
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+CTestTestfile.cmake
+CMakeUserPresets.json
+compile_commands.json
+.cache/
+
+# --- Qt generated code (moc / uic / rcc) ---
+moc_*.cpp
+moc_*.h
+ui_*.h
+qrc_*.cpp
+*.moc
+.qmake.stash
+
+# --- Java / Gradle / Maven ---
+.gradle/
+.kotlin/
+
+# --- Python ---
+__pycache__/
+*.egg-info/
+.eggs/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.tox/
+.venv/
+venv/
+env/
+.ipynb_checkpoints/
+# PyQt/PySide generated code (pyuic / pyrcc).
+# Remove these two lines if you hand-write files named ui_*.py.
+ui_*.py
+*_rc.py
+
+# --- IDEs ---
+.idea/
+.vscode/
+.vs/
+nbproject/private/
+
+# --- Runtime game data (saves, logs, user settings) ---
+saves/
+logs/
