@@ -1,29 +1,3 @@
-"""
-game_logic.py
-=============
-Logique du jeu du Taquin (Personne 1).
-
-Ce module est totalement indépendant de l'interface graphique : il peut être
-utilisé par interface.py (Tkinter), par solver.py (A*) et par tests.py.
-
-Représentation :
-    - La grille est une liste de listes d'entiers (size x size).
-    - Les tuiles vont de 1 à size*size - 1.
-    - La case vide est représentée par 0.
-
-Etat final (exemple 3x3) :
-    1 2 3
-    4 5 6
-    7 8 0
-
-Utilisation rapide :
-    >>> from game_logic import Taquin
-    >>> jeu = Taquin(3)
-    >>> jeu.move_tile(1, 2)      # clic sur la case (ligne 1, colonne 2)
-    >>> jeu.moves
-    >>> jeu.is_solved()
-"""
-
 from __future__ import annotations
 
 import random
