@@ -218,3 +218,5 @@ nbproject/private/
 # --- Runtime game data (saves, logs, user settings) ---
 saves/
 logs/
+__pycache__/
+*.pyc
