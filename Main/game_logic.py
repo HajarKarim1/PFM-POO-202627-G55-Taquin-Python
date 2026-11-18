@@ -35,6 +35,7 @@ class Taquin:
         self.board: Board = []
         self.initial_board: Board = []
         self.moves: int = 0
+        self._history: List[Tuple[Board, int]] = []
         self.new_game()
 
     # Création / initialisation
@@ -56,11 +57,13 @@ class Taquin:
         self.board = self._shuffled_board()
         self.initial_board = [row[:] for row in self.board]
         self.moves = 0
+        self._history.clear()
 
     def restart(self) -> None:
         """Recommence la partie en cours avec le même mélange."""
         self.board = [row[:] for row in self.initial_board]
         self.moves = 0
+        self._history.clear()
 
     def _shuffled_board(self) -> Board:
         """
@@ -125,8 +128,16 @@ class Taquin:
         if not self.can_move(row, col):
             return False
         er, ec = self.find_empty()
+        self._history.append(([line[:] for line in self.board], self.moves))
         self.board[er][ec], self.board[row][col] = self.board[row][col], EMPTY
         self.moves += 1
+        return True
+
+    def undo_move(self) -> bool:
+        """Annule le dernier déplacement valide, s'il y en a un."""
+        if not self._history:
+            return False
+        self.board, self.moves = self._history.pop()
         return True
 
     def move_direction(self, direction: Tuple[int, int]) -> bool:
@@ -173,6 +184,7 @@ class Taquin:
         if sorted(v for row in board for v in row) != list(range(self.size ** 2)):
             raise ValueError("L'état doit contenir chaque valeur de 0 à size²-1 une seule fois.")
         self.board = board
+        self._history.clear()
 
     @staticmethod
     def neighbors(state: State) -> List[State]:
@@ -225,9 +237,18 @@ if __name__ == "__main__":
     print("\nRésoluble :", Taquin.is_solvable(jeu.get_state()))
 
     while not jeu.is_solved():
-        saisie = input("\nLigne et colonne de la tuile à déplacer (ex: 1 2), q pour quitter : ").strip()
+        saisie = input(
+            "\nLigne et colonne de la tuile (ex: 1 2), u pour annuler, q pour quitter : "
+        ).strip()
         if saisie.lower() == "q":
             break
+        if saisie.lower() == "u":
+            if jeu.undo_move():
+                print(f"\nMouvements : {jeu.moves}")
+                print(jeu)
+            else:
+                print("Aucun déplacement à annuler.")
+            continue
         try:
             r, c = map(int, saisie.split())
         except ValueError:
